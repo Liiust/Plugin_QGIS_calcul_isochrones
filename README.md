@@ -1,6 +1,7 @@
 # QGIS Plugin – Isochrone Calculation (IGN Géoplateforme)
-
-A QGIS plugin that queries `https://data.geopf.fr/navigation/isochrone` using all available service parameters and displays the results on the map. 
+A QGIS plugin that enables access to the isochrone calculation service provided by the IGN Géoplateforme (https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/calcul-isochrone-isodistance/). 
+The plugin uses all available services (URL: https://data.geopf.fr/navigation/getcapabilities).
+It queries `https://data.geopf.fr/navigation/isochrone` using all available service parameters and displays the results on the map. 
 
 ## Libraries: 
     `requests` (optional, with a fallback to `urllib`)
@@ -47,12 +48,12 @@ Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins
 
     
 # Extension QGIS – Calcul d'isochrones (IGN Géoplateforme) - En français
-
-Proposer un plugin QGIS permettant de faire appel au service de calculs d'isochrones de la Géoplateforme IGN (https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/calcul-isochrone-isodistance/). 
-Possibilité de paramétrer la requête (url : https://data.geopf.fr/navigation/getcapabilities) avec toutes les possibilités offertes par le service, et afficher la réponse dans l'interface cartographique.
+Extension QGIS permettant d'accéder au service de calcul d'isochrones proposé par la Géoplateforme de l'IGN (https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/calcul-isochrone-isodistance/).
+L'extension utilise l'ensemble des services disponibles (URL : https://data.geopf.fr/navigation/getcapabilities).
+Elle interroge https://data.geopf.fr/navigation/isochrone en utilisant tous les paramètres de service disponibles et affiche les résultats sur la carte.
 
 ## Bibliothèques : 
-    `requests` (optionnelle, avec une solution de repli utilisant `urllib`)
+    requests (optionnelle, avec une solution de repli utilisant `urllib`)
     PyQt
     PyQGIS.
     

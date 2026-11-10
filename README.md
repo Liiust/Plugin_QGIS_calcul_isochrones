@@ -44,7 +44,8 @@ Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins
     Class diagram
     Sequence diagram
 
-
+## Test view (20-minute walk from Géodata Paris using bdtopo_valhalla)
+<img width="1171" height="757" alt="image" src="https://github.com/user-attachments/assets/e21062e7-ca34-43c6-ac17-5e6c68beca5e" />
 
 
 
@@ -95,3 +96,8 @@ Compressez le dossier « isochrones_ign » au format ZIP -> Dans QGIS : Extensio
     Diagramme de cas d'utilisation
     Diagramme de classes
     Diagramme de séquence
+
+## Visualisation d'un test (20 min à pied de Géodata Paris avec bdtopo_valhalla)
+<img width="1171" height="757" alt="image" src="https://github.com/user-attachments/assets/e21062e7-ca34-43c6-ac17-5e6c68beca5e" />
+
+

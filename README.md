@@ -4,11 +4,11 @@ The plugin uses all available services (URL: https://data.geopf.fr/navigation/ge
 It queries `https://data.geopf.fr/navigation/isochrone` using all available service parameters and displays the results on the map. 
 
 ## Libraries: 
-    `requests` (optional, with a fallback to `urllib`)
+    requests (optional, with a fallback to `urllib`)
     PyQt
     PyQGIS
 
-    re # (for substitutions within character strings using regular expressions)
+    re (for substitutions within character strings using regular expressions)
     json
     time
     dataclasses
@@ -57,7 +57,7 @@ Elle interroge https://data.geopf.fr/navigation/isochrone en utilisant tous les 
     PyQt
     PyQGIS.
     
-    re # (pour des substitutions dans des chaînes de caractères à l’aide d’expressions régulières)
+    re (pour des substitutions dans des chaînes de caractères à l’aide d’expressions régulières)
     json
     time
     dataclasses

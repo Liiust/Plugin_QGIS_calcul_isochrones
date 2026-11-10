@@ -2,7 +2,7 @@
 Using the plugin WITHOUT QGIS (via terminal). 
 
   python -m dev.cli capabilities            # displays the service's raw JSON
-  python -m dev.cli compute --point 2.587350,48.841324 --cost-type time \\ # test centered on Géodata Paris (ENSG)
+  python -m dev.cli compute --point 2.587476,48.841221 --cost-type time \\ # test centered on Géodata Paris (ENSG)
         --cost-value 20 --profile pedestrian --out iso.geojson
   python -m dev.cli compute ... --demo       # without a network (mock server), using offline.py
 

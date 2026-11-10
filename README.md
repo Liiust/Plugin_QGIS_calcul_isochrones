@@ -7,8 +7,14 @@ A QGIS plugin that queries `https://data.geopf.fr/navigation/isochrone` using al
     PyQt
     PyQGIS
 
-and also : 
-    
+    re # (for substitutions within character strings using regular expressions)
+    json
+    time
+    dataclasses
+    urllib
+    typing
+    math
+    os
 
 ## List of diagrams required for the analysis:
     Use case diagram
@@ -39,9 +45,8 @@ Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins
 
 
 
-    En français
     
-# Extension QGIS – Calcul d'isochrones (IGN Géoplateforme)
+# Extension QGIS – Calcul d'isochrones (IGN Géoplateforme) - En français
 
 Proposer un plugin QGIS permettant de faire appel au service de calculs d'isochrones de la Géoplateforme IGN (https://cartes.gouv.fr/aide/fr/guides-utilisateur/utiliser-les-services-de-la-geoplateforme/calcul-isochrone-isodistance/). 
 Possibilité de paramétrer la requête (url : https://data.geopf.fr/navigation/getcapabilities) avec toutes les possibilités offertes par le service, et afficher la réponse dans l'interface cartographique.
@@ -51,8 +56,14 @@ Possibilité de paramétrer la requête (url : https://data.geopf.fr/navigation/
     PyQt
     PyQGIS.
     
-En supplément : 
-
+    re # (pour des substitutions dans des chaînes de caractères à l’aide d’expressions régulières)
+    json
+    time
+    dataclasses
+    urllib
+    typing
+    math
+    os
 
 ## Liste des diagrammes attendus pour l'analyse :
     Diagramme de cas d'utilisation

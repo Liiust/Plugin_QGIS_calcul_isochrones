@@ -16,8 +16,8 @@ from isochrones_ign.api import (
 )
 from isochrones_ign.controller import IsochroneController
 from isochrones_ign.geo import approx_area_km2, bbox, build_feature_collection, layer_name, write_geojson
-from isochrones_ign.offline import CAPABILITIES, FakeResponse, FakeSession, circle
-from isochrones_ign import cli
+from dev.offline import CAPABILITIES, FakeResponse, FakeSession, circle
+from dev import cli
 
 FORM = {"point": "2.337306,48.849319", "resource": "bdtopo-valhalla", "cost_type": "time",
         "cost_value": 10, "profile": "pedestrian", "direction": "departure",

@@ -20,10 +20,11 @@ Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins
 ## Architecture
 | File | Role | Depends on QGIS? (bool) |
 |---|---|---|
+| `__init__.py` | A REMPLIR | FALSE| 
 | `api.py` | `IsochroneRequest`, `GeoplateformeClient`, read getCapabilities/answer | FALSE |
 | `geo.py` | FeatureCollection GeoJSON, area, extent, file writing | FALSE |
 | `controller.py` | form -> request validated -> result | FALSE |
-| `layer_builder.py`, `dialog.py`, `main.py`, '__init__.py' | QGIS layer, PyQt interface, plugin input| TRUE |
+| `layer_builder.py`, `dialog.py`, `main.py` | QGIS layer, PyQt interface, plugin input| TRUE |
 
 ## Libraries: 
     requests (optional, with a fallback to `urllib`)
@@ -38,13 +39,16 @@ Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins
     typing
     math
     os
+    tempfile
+    argparse
+    zipfile
 
 ## List of diagrams required for the analysis:
     Use case diagram
     Class diagram
     Sequence diagram
 
-## Test view (20-minute walk from Géodata Paris using bdtopo_valhalla)
+## Test view (20-minute walk from Géodata Paris using bdtopo-valhalla)
 <img width="1171" height="757" alt="image" src="https://github.com/user-attachments/assets/e21062e7-ca34-43c6-ac17-5e6c68beca5e" />
 
 
@@ -91,13 +95,16 @@ Compressez le dossier « isochrones_ign » au format ZIP -> Dans QGIS : Extensio
     typing
     math
     os
+    tempfile
+    argparse
+    zipfile
 
 ## Liste des diagrammes attendus pour l'analyse :
     Diagramme de cas d'utilisation
     Diagramme de classes
     Diagramme de séquence
 
-## Visualisation d'un test (20 min à pied de Géodata Paris avec bdtopo_valhalla)
+## Visualisation d'un test (20 min à pied de Géodata Paris avec bdtopo-valhalla)
 <img width="1171" height="757" alt="image" src="https://github.com/user-attachments/assets/e21062e7-ca34-43c6-ac17-5e6c68beca5e" />
 
 

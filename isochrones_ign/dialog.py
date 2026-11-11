@@ -52,7 +52,7 @@ class IsochroneDialog(QDialog):
         row.addWidget(self.btn_pick)
         form = QFormLayout()
         form.addRow("Point", row)
-        form.addRow("Ressource", self.resource)
+        form.addRow("Resource", self.resource)
         form.addRow("Cost type", self.cost_type)
         form.addRow("Cost value", self.cost_value)
         form.addRow("Profile", self.profile)
@@ -111,7 +111,7 @@ class IsochroneDialog(QDialog):
         self.resource.setToolTip(ro.description)
         if ro.point_bbox:
             x0, y0, x1, y1 = ro.point_bbox
-            self.point_edit.setToolTip(f"Covered area : lon {x0:.2f} à {x1:.2f}, lat {y0:.2f} à {y1:.2f}")
+            self.point_edit.setToolTip(f"Covered area : lon {x0:.2f} to {x1:.2f}, lat {y0:.2f} à {y1:.2f}")
         example = self.controller.constraint_example(rid)
         self.constraints.setPlaceholderText(f"optional, ex. {example}" if example else "no constraints available")
         self.constraints.setToolTip(self.controller.constraint_help(rid))
@@ -170,7 +170,7 @@ class IsochroneDialog(QDialog):
 
         self._background("Isochrones IGN : calculation", lambda: self.controller.compute(form), done)
 
-    # -- tâche d'arrière-plan -------------------------------------------- #
+    # -- background task -------------------------------------------- #
     def _set_busy(self, busy: bool):
         for w in (self.btn_compute, self.btn_caps, self.btn_pick):
             w.setEnabled(not busy)

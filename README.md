@@ -6,10 +6,10 @@ It queries `https://data.geopf.fr/navigation/isochrone` using all available serv
 ## Testing without QGIS
 ```
 python -m unittest discover -s tests -v                      # 30 tests, no network
-python -m isochrones_ign.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
-python -m isochrones_ign.cli capabilities                    # Raw JSON from the actual service
-python -m isochrones_ign.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
-python -m isochrones_ign.cli capabilities --summary          # isochrone-compatible resources
+python -m dev.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
+python -m dev.cli capabilities                    # Raw JSON from the actual service
+python -m dev.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
+python -m dev.cli capabilities --summary          # isochrone-compatible resources
 # test against the real service : bash -> RUN_LIVE=1 python -m unittest tests.test_live -v
 # for PowerShell -> $env:RUN_LIVE="1"; python -m unittest tests.test_live -v
 ```
@@ -59,10 +59,10 @@ Elle interroge https://data.geopf.fr/navigation/isochrone en utilisant tous les 
 ## Tests hors QGIS
 ```
 python -m unittest discover -s tests -v                      # 30 tests, sans réseau
-python -m isochrones_ign.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
-python -m isochrones_ign.cli capabilities                    # JSON brut extrait du vrai service
-python -m isochrones_ign.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
-python -m isochrones_ign.cli capabilities --summary          # Ressources compatibles avec l'isochrone
+python -m dev.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
+python -m dev.cli capabilities                    # JSON brut extrait du vrai service
+python -m dev.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
+python -m dev.cli capabilities --summary          # Ressources compatibles avec l'isochrone
 # test avec le vrai service : bash -> RUN_LIVE=1 python -m unittest tests.test_live -v
 # pour PowerShell -> $env:RUN_LIVE="1"; python -m unittest tests.test_live -v
 ```

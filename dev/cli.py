@@ -17,9 +17,9 @@ import argparse
 import json
 import sys
 
-from .api import GeoplateformeClient, GeoplateformeError
-from .controller import IsochroneController
-from .geo import approx_area_km2, bbox
+from isochrones_ign.api import GeoplateformeClient, GeoplateformeError
+from isochrones_ign.controller import IsochroneController
+from isochrones_ign.geo import approx_area_km2, bbox
 from .offline import FakeSession
 
 

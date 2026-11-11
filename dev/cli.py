@@ -53,7 +53,7 @@ def main(argv=None) -> int:
 
             for ro in parse_capabilities(raw).resources.values():
                 print(f"{ro.id}\n  zone : {ro.point_bbox}  max : {ro.cost_value_max}  crs : {', '.join(ro.crs)}")
-                print(f"  contraintes : {', '.join(ro.constraints) or '-'}")
+                print(f"  constraints : {', '.join(ro.constraints) or '-'}")
             return 0
         ctrl = IsochroneController(client)
         ctrl.load_options()

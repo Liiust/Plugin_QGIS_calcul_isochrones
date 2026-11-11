@@ -182,7 +182,7 @@ class TestClient(unittest.TestCase):
         with self.assertRaises(ApiError) as cm:
             c.compute(IsochroneRequest("2.3,48.8", "bdtopo-valhalla", "time", 5))
         self.assertEqual(cm.exception.status, 400)
-        self.assertIn("refusée", str(cm.exception))
+        self.assertIn("refused", str(cm.exception))
 
     def test_network_exception_and_bad_json(self):
         class Boom:
@@ -249,7 +249,7 @@ class TestControllerEndToEnd(unittest.TestCase):
         call = self.session.calls[-1]
         self.assertTrue(call["url"].endswith("/isochrone"))
         self.assertEqual(call["params"]["profile"], "pedestrian")
-        # 10 min à pied (≈1,11 m/s) -> rayon ≈ 666 m -> aire ≈ 1,39 km²
+        # 10-minute walk (≈1.11 m/s) -> radius ≈ 666 m -> area ≈ 1.39 km²
         self.assertAlmostEqual(approx_area_km2(res.response.geometry), math.pi * 0.666**2, delta=0.05)
         self.assertEqual(res.feature_collection["features"][0]["properties"]["costValue"], 10.0)
 

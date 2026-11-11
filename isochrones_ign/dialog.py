@@ -27,10 +27,10 @@ class IsochroneDialog(QDialog):
         self.controller = controller or IsochroneController()
         self._task = None  # reference to be kept as long as the task is running
 
-        self.setWindowTitle("Isochrone / isodistance calculation (IGN Geoplatform)")
+        self.setWindowTitle("Isochrone / isodistance computing (IGN Géoplatforme)")
         self.point_edit = QLineEdit()
         self.point_edit.setPlaceholderText("lon,lat (EPSG:4326)")
-        self.btn_pick = QPushButton("Choose from the map")
+        self.btn_pick = QPushButton("Pick on map")
         self.resource = QComboBox()
         self.cost_type = QComboBox()
         self.cost_value = QDoubleSpinBox()
@@ -44,7 +44,7 @@ class IsochroneDialog(QDialog):
         self.constraints = QLineEdit()
         self.constraints.setPlaceholderText("optional (JSON)")
         self.btn_caps = QPushButton("Reload service options")
-        self.btn_compute = QPushButton("Calculate")
+        self.btn_compute = QPushButton("Compute")
         self.btn_close = QPushButton("Close")
 
         row = QHBoxLayout()
@@ -56,7 +56,7 @@ class IsochroneDialog(QDialog):
         form.addRow("Cost type", self.cost_type)
         form.addRow("Cost value", self.cost_value)
         form.addRow("Profile", self.profile)
-        form.addRow("Sense", self.direction)
+        form.addRow("Direction", self.direction)
         form.addRow("Unit of time", self.time_unit)
         form.addRow("Unit of distance", self.distance_unit)
         form.addRow("Constraints", self.constraints)
@@ -113,7 +113,7 @@ class IsochroneDialog(QDialog):
             x0, y0, x1, y1 = ro.point_bbox
             self.point_edit.setToolTip(f"Covered area : lon {x0:.2f} to {x1:.2f}, lat {y0:.2f} à {y1:.2f}")
         example = self.controller.constraint_example(rid)
-        self.constraints.setPlaceholderText(f"optional, ex. {example}" if example else "no constraints available")
+        self.constraints.setPlaceholderText(f"optional, e.g. {example}" if example else "no constraints available")
         self.constraints.setToolTip(self.controller.constraint_help(rid))
 
     def load_options(self):
@@ -168,7 +168,7 @@ class IsochroneDialog(QDialog):
             self.canvas.refresh()
             self.iface.messageBar().pushSuccess(TITLE, f"Layer ' {result.name} ' added.")
 
-        self._background("Isochrones IGN : calculation", lambda: self.controller.compute(form), done)
+        self._background("Isochrones IGN : Computing", lambda: self.controller.compute(form), done)
 
     # -- background task -------------------------------------------- #
     def _set_busy(self, busy: bool):

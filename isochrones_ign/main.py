@@ -28,7 +28,7 @@ class IsochronePlugin:
     def initGui(self):  # noqa: N802
         icon_path = os.path.join(self.plugin_dir, "icon.png")
         icon = QIcon(icon_path) if os.path.exists(icon_path) else QIcon()
-        self.action = QAction(icon, "Isochrone calculation (IGN)", self.iface.mainWindow())
+        self.action = QAction(icon, "Isochrone computing (IGN)", self.iface.mainWindow())
         self.action.triggered.connect(self.run)
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu(self.MENU, self.action)

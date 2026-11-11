@@ -182,7 +182,7 @@ class TestClient(unittest.TestCase):
         with self.assertRaises(ApiError) as cm:
             c.compute(IsochroneRequest("2.3,48.8", "bdtopo-valhalla", "time", 5))
         self.assertEqual(cm.exception.status, 400)
-        self.assertIn("refused", str(cm.exception))
+        self.assertIn("refusée", str(cm.exception))
 
     def test_network_exception_and_bad_json(self):
         class Boom:

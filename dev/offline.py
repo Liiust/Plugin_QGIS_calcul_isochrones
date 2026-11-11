@@ -40,7 +40,7 @@ _IMPORTANCE = {"key": "importance", "availableConstraintType": ["banned", "prefe
 _FRANCE = "-63.28125,-21.42148437,55.8984375,51.27109375"
 _PROJ = ["EPSG:4326", "EPSG:2154", "EPSG:3857"]
 
-# Extrait fidèle de la structure du vrai getCapabilities (ressources réduites à 4).
+# An accurate excerpt of the structure of the actual getCapabilities (resources reduced to 4).
 CAPABILITIES: Dict[str, Any] = {
     "info": {"name": "Road2"},
     "operations": [{"id": "route"}, {"id": "isochrone"}, {"id": "nearest"}],
@@ -80,7 +80,7 @@ def circle(lon: float, lat: float, radius_m: float, n: int = 72) -> List[List[fl
 
 
 class FakeSession:
-    """Remplace requests.Session : mémorise les appels dans `self.calls`."""
+    """Replaces requests.Session: stores calls in `self.calls`."""
 
     def __init__(self, fail_with: Optional[int] = None):
         self.calls: List[Dict[str, Any]] = []
@@ -89,7 +89,7 @@ class FakeSession:
     def get(self, url: str, params: Optional[dict] = None, timeout: float = 30) -> FakeResponse:
         self.calls.append({"url": url, "params": params})
         if self.fail_with:
-            return FakeResponse({"error": {"message": "requête refusée (simulation)"}}, self.fail_with)
+            return FakeResponse({"error": {"message": "request denied (simulation)"}}, self.fail_with)
         if url.endswith("/getCapabilities"):
             return FakeResponse(CAPABILITIES)
         if url.endswith("/isochrone"):

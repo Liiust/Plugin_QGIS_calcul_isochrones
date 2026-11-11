@@ -58,7 +58,7 @@ def bbox(geometry: Dict[str, Any]) -> Tuple[float, float, float, float]:
 
 
 def _ring_area_km2(ring: List[List[float]]) -> float:
-    """Area of ​​a longitude/latitude ring, calculated via local equirectangular projection."""
+    """Area of ​​a longitude/latitude ring, computed via local equirectangular projection."""
     lat0 = math.radians(sum(p[1] for p in ring) / len(ring))
     pts = [
         (math.radians(p[0]) * EARTH_RADIUS_M * math.cos(lat0), math.radians(p[1]) * EARTH_RADIUS_M)

@@ -225,7 +225,7 @@ class IsochroneRequest:
             if not (x0 <= lon <= x1 and y0 <= lat <= y1):
                 raise ValidationError(
                     f"The point is outside the area covered by ' {ro.id} ' "
-                    f"(lon {x0:.2f} à {x1:.2f}, lat {y0:.2f} à {y1:.2f})."
+                    f"(lon {x0:.2f} to {x1:.2f}, lat {y0:.2f} to {y1:.2f})."
                 )
         self._validate_constraints(ro)
 

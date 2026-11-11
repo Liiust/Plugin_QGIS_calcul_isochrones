@@ -45,7 +45,7 @@ class ApiError(GeoplateformeError):
 # --------------------------------------------------------------------------- #
 @dataclass
 class ConstraintSpec:
-    """An authorized constraint for a resource  (ex. waytype / banned / = / tunnel)."""
+    """An authorized constraint for a resource  (e.g. waytype / banned / = / tunnel)."""
 
     key: str
     types: List[str] = field(default_factory=list)
@@ -105,7 +105,7 @@ def _str_list(values: Any, fallback: List[str]) -> List[str]:
 def _parse_resource(res: Dict[str, Any]) -> Optional[ResourceOptions]:
     ops = [o for o in res.get("availableOperations", []) if isinstance(o, dict) and o.get("id") == "isochrone"]
     if not ops:
-        return None  # ex. bdtopo-osrm : itinerary only
+        return None  # e.g. bdtopo-osrm : itinerary only
     params = {p["id"]: p.get("values") for p in ops[0].get("availableParameters", []) if isinstance(p, dict) and "id" in p}
     ro = ResourceOptions(id=res["id"], description=str(res.get("description", "")))
     ro.profiles = _str_list(params.get("profile"), ro.profiles)
@@ -166,7 +166,7 @@ def parse_point(text: str, geographic: bool = True) -> tuple[float, float]:
     """'2.337306,48.849319' -> (lon, lat) ; raise ValidationError if not valid."""
     m = _POINT_RE.match(text or "")
     if not m:
-        raise ValidationError("Invalid point : expected ' lon,lat ' (ex. 2.337306,48.849319).")
+        raise ValidationError("Invalid point : expected ' lon,lat ' (e.g. 2.587476,48.849319).")
     lon, lat = float(m.group(1)), float(m.group(2))
     if geographic and not (-180 <= lon <= 180 and -90 <= lat <= 90):
         raise ValidationError("Out-of-bounds point : lon ∈ [-180;180], lat ∈ [-90;90].")

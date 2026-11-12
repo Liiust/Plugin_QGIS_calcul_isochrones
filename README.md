@@ -18,13 +18,43 @@ python -m dev.cli capabilities --summary          # isochrone-compatible resourc
 Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins > Install from ZIP.
 
 ## Architecture
-| File | Role | Depends on QGIS? (bool) |
+```
+Plugin_QGIS_calcul_isochrones/
+├── dev/                     # development tools, NOT installed in QGIS
+├── diagrammes/              # UML diagrams (class, sequence, use case, OLD sequence diagramm in French and use case diagram in French)
+├── isochrones_ign/          # the plugin itself (the only folder installed in QGIS)
+├── tests/                   # automated tests (no QGIS needed)
+├── .gitignore
+└── README.md
+```
+
+### `isochrones_ign/` – the plugin
+| File | Main content | Needs QGIS? |
 |---|---|---|
-| `__init__.py` | A REMPLIR | FALSE| 
-| `api.py` | `IsochroneRequest`, `GeoplateformeClient`, read getCapabilities/answer | FALSE |
-| `geo.py` | FeatureCollection GeoJSON, area, extent, file writing | FALSE |
-| `controller.py` | form -> request validated -> result | FALSE |
-| `layer_builder.py`, `dialog.py`, `main.py` | QGIS layer, PyQt interface, plugin input| TRUE |
+| `__init__.py` | `classFactory()`, entry point called by QGIS (imports `main` only when called) | at load time |
+| `main.py` | `IsochronePlugin`: toolbar icon, menu entry, opens the dialog | yes |
+| `dialog.py` | `IsochroneDialog`: PyQt form, point picking, background tasks (`QgsTask`) | yes |
+| `layer_builder.py` | `add_isochrone_layer()`: loads the GeoJSON result as a styled QGIS layer | yes |
+| `controller.py` | `IsochroneController`, `IsochroneResult`: form values → validated request → result | no |
+| `api.py` | `IsochroneRequest`, `IsochroneResponse`, `GeoplateformeClient`, capabilities model (`Options`, `ResourceOptions`, `ConstraintSpec`), exceptions | no |
+| `geo.py` | GeoJSON helpers: feature collection, bounding box, approximate area, file writing | no |
+| `metadata.txt`, `icon.png` | plugin metadata and icon read by QGIS | – |
+
+The code is split in two layers: the interface (`main`, `dialog`, `layer_builder`) is the only part that imports QGIS/PyQt, while `controller`, `api` and `geo` are pure Python, which is what makes the tests below possible without QGIS.
+
+### `dev/` – development tools (not part of the plugin)
+| File | Role |
+|---|---|
+| `offline.py` | Fake HTTP server (`FakeSession`, sample `CAPABILITIES`) used by the tests and by the demo mode |
+| `cli.py` | Command-line interface: `python -m dev.cli capabilities`, `python -m dev.cli compute …`, `--demo` for offline use |
+
+### `tests/` – automated tests
+| File | Role |
+|---|---|
+| `test_core.py` | Unit tests of `api`, `geo`, `controller` and `dev.cli` (30 tests, no network, no QGIS) |
+| `test_live.py` | One test against the real IGN service, skipped unless `RUN_LIVE=1` |
+| `capabilities_reel.json` | Copy of a real `getCapabilities` response, used as a test fixture |
+
 
 ## Libraries: 
     requests (optional, with a fallback to `urllib`)
@@ -75,12 +105,43 @@ python -m dev.cli capabilities --summary          # Ressources compatibles avec 
 Compressez le dossier « isochrones_ign » au format ZIP -> Dans QGIS : Extensions > Installer/gérer les extensions > Installer à partir d'un fichier ZIP.
 
 ## Architecture
-| Fichier | Rôle | Dépend de QGIS ? (booléen) |
+```
+Plugin_QGIS_calcul_isochrones/
+├── dev/                     # outils de développement, NON installés dans QGIS
+├── diagrammes/              # diagrammes UML (classes, séquence, cas d'utilisation, ancien diagramme de séquence en français, diagramme de cas d'usage en français)
+├── isochrones_ign/          # le plugin (seul dossier installé dans QGIS)
+├── tests/                   # tests automatiques (sans QGIS)
+├── .gitignore
+└── README.md
+```
+
+### `isochrones_ign/` – le plugin
+| Fichier | Contenu principal | Utilise QGIS ? |
 |---|---|---|
-| `api.py` | `IsochroneRequest`, `GeoplateformeClient`, lecture de `getCapabilities`/réponses | NON |
-| `geo.py` | `FeatureCollection` GeoJSON, calcul de surface, emprise, écriture de fichiers | NON |
-| `controller.py` | Formulaire -> validation de la requête -> traitement du résultat | NON |
-| `layer_builder.py`, `dialog.py`, `main.py`, `__init__.py` | Couche QGIS, interface PyQt, point d'entrée de l'extension | OUI |
+| `__init__.py` | `classFactory()`, point d'entrée appelé par QGIS (n'importe `main` qu'à l'appel) | au chargement |
+| `main.py` | `IsochronePlugin` : icône, entrée de menu, ouverture du dialogue | oui |
+| `dialog.py` | `IsochroneDialog` : formulaire PyQt, choix du point, tâches d'arrière-plan (`QgsTask`) | oui |
+| `layer_builder.py` | `add_isochrone_layer()` : charge le résultat GeoJSON en couche QGIS stylée | oui |
+| `controller.py` | `IsochroneController`, `IsochroneResult` : formulaire → requête validée → résultat | non |
+| `api.py` | `IsochroneRequest`, `IsochroneResponse`, `GeoplateformeClient`, modèle du getCapabilities (`Options`, `ResourceOptions`, `ConstraintSpec`), exceptions | non |
+| `geo.py` | Utilitaires GeoJSON : FeatureCollection, emprise, aire approchée, écriture du fichier | non |
+| `metadata.txt`, `icon.png` | métadonnées et icône lues par QGIS | – |
+
+Le code est séparé en deux couches : l'interface (`main`, `dialog`, `layer_builder`) est la seule à importer QGIS/PyQt, tandis que `controller`, `api` et `geo` sont du Python pur, ce qui permet de tester sans QGIS.
+
+### `dev/` – outils de développement (hors plugin)
+| Fichier | Rôle |
+|---|---|
+| `offline.py` | Faux serveur HTTP (`FakeSession`, `CAPABILITIES` d'exemple) utilisé par les tests et par le mode démo |
+| `cli.py` | Ligne de commande : `python -m dev.cli capabilities`, `python -m dev.cli compute …`, `--demo` pour travailler hors ligne |
+
+### `tests/` – tests automatiques
+| Fichier | Rôle |
+|---|---|
+| `test_core.py` | Tests unitaires de `api`, `geo`, `controller` et `dev.cli` (30 tests, sans réseau ni QGIS) |
+| `test_live.py` | Un test contre le vrai service IGN, ignoré sauf si `RUN_LIVE=1` |
+| `capabilities_reel.json` | Copie d'une vraie réponse `getCapabilities`, utilisée comme jeu de test |
+
 
 ## Bibliothèques : 
     requests (optionnelle, avec une solution de repli utilisant `urllib`)

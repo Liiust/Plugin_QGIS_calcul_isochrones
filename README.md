@@ -3,17 +3,6 @@ A QGIS plugin that enables access to the isochrone calculation service provided 
 The plugin uses all available services (URL: https://data.geopf.fr/navigation/getcapabilities).
 It queries `https://data.geopf.fr/navigation/isochrone` using all available service parameters and displays the results on the map. 
 
-## Testing without QGIS
-```
-python -m unittest discover -s tests -v                      # 30 tests, no network
-python -m dev.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
-python -m dev.cli capabilities                    # Raw JSON from the actual service
-python -m dev.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
-python -m dev.cli capabilities --summary          # isochrone-compatible resources
-# test against the real service : bash -> RUN_LIVE=1 python -m unittest tests.test_live -v
-# for PowerShell -> $env:RUN_LIVE="1"; python -m unittest tests.test_live -v
-```
-
 ## Installing in QGIS
 Zip the 'isochrones_ign' folder -> In QGIS: Plugins > Manage and Install Plugins > Install from ZIP.
 
@@ -55,6 +44,16 @@ The code is split in two layers: the interface (`main`, `dialog`, `layer_builder
 | `test_live.py` | One test against the real IGN service, skipped unless `RUN_LIVE=1` |
 | `capabilities_reel.json` | Copy of a real `getCapabilities` response, used as a test fixture |
 
+## Testing
+```
+python -m unittest discover -s tests -v                      # 30 tests, no network
+python -m dev.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
+python -m dev.cli capabilities                    # Raw JSON from the actual service
+python -m dev.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
+python -m dev.cli capabilities --summary          # isochrone-compatible resources
+# test against the real service : bash -> RUN_LIVE=1 python -m unittest tests.test_live -v
+# for PowerShell -> $env:RUN_LIVE="1"; python -m unittest tests.test_live -v
+```
 
 ## Libraries: 
     requests (optional, with a fallback to `urllib`)
@@ -89,17 +88,6 @@ Extension QGIS permettant d'accéder au service de calcul d'isochrones proposé 
 L'extension utilise l'ensemble des services disponibles (URL : https://data.geopf.fr/navigation/getcapabilities).
 Elle interroge https://data.geopf.fr/navigation/isochrone en utilisant tous les paramètres de service disponibles et affiche les résultats sur la carte.
 
-
-## Tests hors QGIS
-```
-python -m unittest discover -s tests -v                      # 30 tests, sans réseau
-python -m dev.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
-python -m dev.cli capabilities                    # JSON brut extrait du vrai service
-python -m dev.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
-python -m dev.cli capabilities --summary          # Ressources compatibles avec l'isochrone
-# test avec le vrai service : bash -> RUN_LIVE=1 python -m unittest tests.test_live -v
-# pour PowerShell -> $env:RUN_LIVE="1"; python -m unittest tests.test_live -v
-```
 
 ## Installation dans QGIS
 Compressez le dossier « isochrones_ign » au format ZIP -> Dans QGIS : Extensions > Installer/gérer les extensions > Installer à partir d'un fichier ZIP.
@@ -142,6 +130,16 @@ Le code est séparé en deux couches : l'interface (`main`, `dialog`, `layer_bui
 | `test_live.py` | Un test contre le vrai service IGN, ignoré sauf si `RUN_LIVE=1` |
 | `capabilities_reel.json` | Copie d'une vraie réponse `getCapabilities`, utilisée comme jeu de test |
 
+## Tests
+```
+python -m unittest discover -s tests -v                      # 30 tests, sans réseau
+python -m dev.cli --demo compute --point 2.3373,48.8493 --cost-type time --cost-value 10 --profile pedestrian
+python -m dev.cli capabilities                    # JSON brut extrait du vrai service
+python -m dev.cli compute --point 2.3373,48.8493 --cost-value 10 --out iso.geojson
+python -m dev.cli capabilities --summary          # Ressources compatibles avec l'isochrone
+# test avec le vrai service : bash -> RUN_LIVE=1 python -m unittest tests.test_live -v
+# pour PowerShell -> $env:RUN_LIVE="1"; python -m unittest tests.test_live -v
+```
 
 ## Bibliothèques : 
     requests (optionnelle, avec une solution de repli utilisant `urllib`)
